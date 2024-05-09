@@ -1,4 +1,4 @@
-package com.example.kocelainterview.ui.theme
+package com.example.kocelainterview.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

@@ -1,4 +1,4 @@
-package com.example.kocelainterview.ui.theme
+package com.example.kocelainterview.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
