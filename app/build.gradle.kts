@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+   // implementation(libs.androidx.material3.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -101,8 +102,7 @@ dependencies {
 
     //coil
     implementation("io.coil-kt:coil-compose:2.4.0")
-    //display awesome font
-    //implementation("com.github.Gurupreet:FontAwesomeCompose:1.0.0")
+
     //full layout without status bar
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.1-alpha")
 

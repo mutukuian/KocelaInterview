@@ -30,6 +30,6 @@ data class ShipDto(
 
 fun ShipDto.toShip():Ship{
     return Ship(
-        active, ship_id, ship_name, weight_kg, year_built
+        active = active, ship_id = ship_id, ship_name = ship_name, image = image, weight_kg = weight_kg, year_built = year_built
     )
 }
