@@ -14,13 +14,13 @@ class GetShipUseCase(
 ) {
     operator fun invoke(shipId:String): Flow<Resource<ShipDetail>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading<ShipDetail>())
             val ship = repository.getShipById(shipId).toShipDetail()
-            emit(Resource.Success(ship))
+            emit(Resource.Success<ShipDetail>(ship))
         }catch (e: HttpException){
-            emit(Resource.Error(e.localizedMessage?:"An unexpected error occurred"))
+            emit(Resource.Error<ShipDetail>(e.localizedMessage?:"An unexpected error occurred"))
         } catch (e: IOException){
-            emit(Resource.Error(e.localizedMessage?:"Could not reach the server.Check your internet connection"))
+            emit(Resource.Error<ShipDetail>(e.localizedMessage?:"Could not reach the server.Check your internet connection"))
 
         }
     }

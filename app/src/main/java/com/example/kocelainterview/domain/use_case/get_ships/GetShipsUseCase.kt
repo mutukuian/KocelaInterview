@@ -17,13 +17,13 @@ class GetShipsUseCase @Inject constructor(
 ){
    operator fun invoke(): Flow<Resource<List<Ship>>> = flow {
        try {
-           emit(Resource.Loading())
+           emit(Resource.Loading<List<Ship>>())
            val ships = repository.getShips().map { it.toShip() }
-           emit(Resource.Success(ships))
+           emit(Resource.Success<List<Ship>>(ships))
        }catch (e:HttpException){
-           emit(Resource.Error(e.localizedMessage?:"An unexpected error occurred"))
+           emit(Resource.Error<List<Ship>>(e.localizedMessage?:"An unexpected error occurred"))
        } catch (e:IOException){
-           emit(Resource.Error(e.localizedMessage?:"Could not reach the server.Check your internet connection"))
+           emit(Resource.Error<List<Ship>>(e.localizedMessage?:"Could not reach the server.Check your internet connection"))
 
        }
    }
