@@ -35,22 +35,29 @@ fun ShipListScreen(
 
     val state = viewModel.state.value
 
-    LazyColumn {
-        if (state.isLoading) {
-            item {
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .wrapContentSize(align = Alignment.Center)
-                )
+    Column {
+        SearchBar(query = state.searchQuery) { newQuery ->
+            viewModel.updateSearchQuery(newQuery) // Update search query in ViewModel
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+
+        LazyColumn {
+            if (state.isLoading) {
+                item {
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .wrapContentSize(align = Alignment.Center)
+                    )
+                }
             }
+
+            items(state.ships) { ship ->
+                ShipImageCard(ships = ship)
+            }
+
+
         }
-
-        items(state.ships){ship->
-            ShipImageCard(ships = ship)
-        }
-
-
     }
 
 }

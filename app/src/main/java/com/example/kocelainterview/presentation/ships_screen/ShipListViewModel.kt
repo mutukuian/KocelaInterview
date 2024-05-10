@@ -21,13 +21,28 @@ class ShipListViewModel @Inject constructor(
     init {
         getShips()
     }
-    private fun getShips(){
-        getShipsUseCase().onEach{result->
-            when(result){
-                is Resource.Success->{_state.value =ShipListState(ships = result.data?: emptyList())}
-                is Resource.Loading->{_state.value =ShipListState(isLoading = true)}
-                is Resource.Error ->{_state.value =ShipListState(error = result.message?:"An unexpected error occurred")}
+    private fun getShips() {
+        getShipsUseCase(query = _state.value.searchQuery) // Pass search query to UseCase
+            .onEach { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        val filteredShips = result.data?.filter { ship ->
+                            ship.ship_name.contains(_state.value.searchQuery.lowercase(), ignoreCase = true)
+                            // You can add more filtering logic based on other ship properties
+                        } ?: emptyList()
+                        _state.value = ShipListState(ships = filteredShips)
+                    }
+                    is Resource.Loading -> _state.value = ShipListState(isLoading = true)
+                    is Resource.Error -> _state.value = ShipListState(error = result.message ?: "An unexpected error occurred")
+                }
             }
-        }.launchIn(viewModelScope)
+            .launchIn(viewModelScope)
     }
+
+    fun updateSearchQuery(newQuery: String) {
+        _state.value = _state.value.copy(searchQuery = newQuery)
+        getShips() // Re-fetch ships with the updated query
+    }
+
+
 }

@@ -14,12 +14,17 @@ import java.io.IOException
 import javax.inject.Inject
 
 class GetShipsUseCase @Inject constructor(
-    private val repository: ShipRepository
+    private val repository: ShipRepository,
+
 ){
-   operator fun invoke(): Flow<Resource<List<Ship>>> = flow {
+   operator fun invoke(query: String = ""): Flow<Resource<List<Ship>>> = flow {
        try {
            emit(Resource.Loading<List<Ship>>())
            val ships = repository.getShips().map { it.toShip() }
+           val filteredShips = ships.filter{ship->
+               ship.ship_name.contains(query.lowercase(), ignoreCase= true)
+           }
+           emit(Resource.Success(filteredShips))
            emit(Resource.Success<List<Ship>>(ships))
        }catch (e:HttpException){
            emit(Resource.Error<List<Ship>>(e.localizedMessage?:"An unexpected error occurred"))
