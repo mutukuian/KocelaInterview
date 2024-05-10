@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.kocelainterview.common.core.Constants.PARAM_SHIP_ID
 import com.example.kocelainterview.common.core.Resource
 import com.example.kocelainterview.domain.use_case.get_ship.GetShipUseCase
-
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -17,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ShipDetailViewModel @Inject constructor(
     private val getShipUseCase: GetShipUseCase,
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ) : ViewModel(){
     private val _state = mutableStateOf(ShipDetailState())
     val state:State<ShipDetailState> = _state

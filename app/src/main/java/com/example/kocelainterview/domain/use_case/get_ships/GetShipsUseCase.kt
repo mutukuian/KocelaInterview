@@ -5,6 +5,7 @@ import com.example.kocelainterview.common.core.Resource
 import com.example.kocelainterview.data.remote.dto.toShip
 import com.example.kocelainterview.domain.model.Ship
 import com.example.kocelainterview.domain.repository_interface.ShipRepository
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow

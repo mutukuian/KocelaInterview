@@ -27,5 +27,5 @@ data class ShipDetailDto(
 )
 
 fun ShipDetailDto.toShipDetail():ShipDetail{
-    return ShipDetail(active, home_port, image, ship_id, ship_model, ship_name, ship_type, speed_kn, status, successful_landings, weight_kg, weight_lbs, year_built)
+    return ShipDetail(active, home_port, ship_id, ship_name, ship_type, weight_kg, year_built)
 }

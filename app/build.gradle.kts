@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -76,15 +77,15 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
 
     //coroutine Lifecycle Scope
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
     //Dagger - hilt
-    implementation("com.google.dagger:hilt-android:2.44.2")
-    kapt("com.google.dagger:hilt-compiler:2.44.2")
+    implementation("com.google.dagger:hilt-android:2.49")
+    kapt("com.google.dagger:hilt-compiler:2.49")
 
-    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
-    kapt("androidx.hilt:hilt-compiler:1.0.0")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
 
 
     //retrofit
@@ -101,13 +102,15 @@ dependencies {
     //coil
     implementation("io.coil-kt:coil-compose:2.4.0")
     //display awesome font
-    implementation("com.github.Gurupreet:FontAwesomeCompose:1.0.0")
+    //implementation("com.github.Gurupreet:FontAwesomeCompose:1.0.0")
     //full layout without status bar
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.1-alpha")
 
     //location
     implementation("com.google.android.gms:play-services-location:21.2.0")
 
-
-
+}
+//allow references to generate code
+kapt{
+    correctErrorTypes = true
 }

@@ -4,12 +4,15 @@ import com.example.kocelainterview.common.core.Resource
 import com.example.kocelainterview.data.remote.dto.toShipDetail
 import com.example.kocelainterview.domain.model.ShipDetail
 import com.example.kocelainterview.domain.repository_interface.ShipRepository
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
-class GetShipUseCase(
+
+class GetShipUseCase @Inject constructor(
     private val repository: ShipRepository
 ) {
     operator fun invoke(shipId:String): Flow<Resource<ShipDetail>> = flow {
