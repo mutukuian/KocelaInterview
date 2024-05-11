@@ -4,20 +4,34 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.cachedIn
+import androidx.paging.map
 import com.example.kocelainterview.common.core.Resource
+import com.example.kocelainterview.data.localdatasource.ShipsEntity
+import com.example.kocelainterview.data.remote.dto.toShip
 import com.example.kocelainterview.domain.use_case.get_ships.GetShipsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
 class ShipListViewModel @Inject constructor(
-    private val getShipsUseCase: GetShipsUseCase
+   // private val getShipsUseCase: GetShipsUseCase
+    pager:Pager<Int,ShipsEntity>
 ) : ViewModel(){
+    /*
     private val _state = mutableStateOf(ShipListState())
     val state:State<ShipListState> = _state
+    */
 
+    val shipPagingFlow = pager.flow.map { pagingData->
+        pagingData.map { it.toShip() }
+    }.cachedIn(viewModelScope)
+
+    /*
     init {
         getShips()
     }
@@ -43,6 +57,6 @@ class ShipListViewModel @Inject constructor(
         _state.value = _state.value.copy(searchQuery = newQuery)
         getShips() // Re-fetch ships with the updated query
     }
-
+*/
 
 }

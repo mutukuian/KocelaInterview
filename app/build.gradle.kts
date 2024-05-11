@@ -61,7 +61,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-   // implementation(libs.androidx.material3.android)
+    //implementation(libs.androidx.paging.compose)
+    // implementation(libs.androidx.material3.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -108,6 +109,16 @@ dependencies {
 
     //location
     implementation("com.google.android.gms:play-services-location:21.2.0")
+
+    //pagging
+    implementation("androidx.paging:paging-runtime-ktx:3.3.0-rc01")
+    //implementation("androidx.paging:paging-compose:3.2.1")
+    implementation("androidx.paging:paging-compose:3.3.0-rc01")
+
+    //Room database
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-paging:2.6.1")
 
 }
 //allow references to generate code
