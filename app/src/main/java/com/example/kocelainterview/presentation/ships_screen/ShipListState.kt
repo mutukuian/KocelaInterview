@@ -6,5 +6,5 @@ data class ShipListState(
     val isLoading:Boolean = false,
     val ships:List<Ship> = emptyList(),
     val error:String = "",
-    val searchQuery: String = ""
+//val searchQuery: String = ""
 )

@@ -1,11 +1,7 @@
 package com.example.kocelainterview.common.di.networkmodule
 
-import android.content.Context
-import androidx.room.Room
-import androidx.room.RoomDatabase
+
 import com.example.kocelainterview.common.core.Constants.BASE_URL
-import com.example.kocelainterview.data.localdatasource.ShipDao
-import com.example.kocelainterview.data.localdatasource.ShipDatabase
 import com.example.kocelainterview.data.remote.api_service.ShipsApi
 import dagger.Module
 import dagger.Provides
@@ -29,25 +25,6 @@ object AppModule {
             .build()
             .create(ShipsApi::class.java)
 
-    }
-
-
-//    @Provides
-//    @Singleton
-//    abstract fun provideShipDatabase(factory: RoomDatabase.Callback): ShipDatabase
-
-
-    @Provides
-    @Singleton
-    fun provideDao(roomDatabase: ShipDatabase):ShipDao{
-        return roomDatabase.shipDao
-    }
-
-    @Provides
-    @Singleton
-    fun provideRoomDatabase(context: Context): RoomDatabase {
-        return Room.databaseBuilder(context, ShipDatabase::class.java, ShipDatabase.DATABASE_NAME)
-            .build()
     }
 
 }
