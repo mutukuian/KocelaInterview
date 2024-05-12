@@ -24,7 +24,6 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ShipsApi::class.java)
-
     }
 
 }
