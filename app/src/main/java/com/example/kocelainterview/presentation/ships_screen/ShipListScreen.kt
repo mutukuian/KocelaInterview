@@ -24,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberAsyncImagePainter
 import com.example.kocelainterview.domain.model.Ship
@@ -32,6 +33,7 @@ import com.example.kocelainterview.domain.model.Ship
 @Composable
 fun ShipListScreen(
 
+    navController: NavController,
     viewModel: ShipListViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
