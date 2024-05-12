@@ -1,68 +1,121 @@
 package com.example.kocelainterview.presentation.ships_screen
 
-import android.widget.Toast
-import androidx.compose.foundation.layout.Arrangement
+
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.paging.LoadState
-import androidx.paging.compose.LazyPagingItems
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberAsyncImagePainter
 import com.example.kocelainterview.domain.model.Ship
 
 
 @Composable
 fun ShipListScreen(
-    ships: LazyPagingItems<Ship>,
+
     viewModel: ShipListViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
-    LaunchedEffect(key1 = ships.loadState) {
-        if (ships.loadState.refresh is LoadState.Error){
-            Toast.makeText(
-                context,
-                "Error: " + (ships.loadState.refresh as LoadState.Error).error.message,
-                Toast.LENGTH_LONG
-            ).show()
-        }
-    }
+    val state = viewModel.state.value
 
-    Box(modifier = Modifier.fillMaxSize()){
-        if (ships.loadState.refresh is LoadState.Loading){
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center)
-            )
-        }else{
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-
-               items(ships){ship->
-                    if (ship != null){
-                        ShipListItem(ship = ships, modifier = Modifier.fillMaxWidth())
-                    }
-                }
-
+    Column {
+        LazyColumn {
+            if (state.isLoading) {
                 item {
-                    if (ships.loadState.append is LoadState.Loading){
-                        CircularProgressIndicator()
-                    }
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .wrapContentSize(align = Alignment.Center)
+                    )
                 }
-                items
+            }
 
-
+            items(state.ships) { ship ->
+                ShipImageCard(ships = ship)
             }
         }
+        if (state.error.isNotBlank()) {
+            Text(
+                text =state.error,
+                color = Color.Red,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+        }
     }
+}
+
+@OptIn(ExperimentalCoilApi::class)
+@Composable
+fun ShipImageCard(ships: Ship){
+    val imagePainter = rememberAsyncImagePainter(model = ships.image)
+    Card(
+        shape = MaterialTheme.shapes.medium,
+        modifier = Modifier.padding(16.dp)
+    ) {
+        Box{
+
+            Image(
+                painter = imagePainter,
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                contentScale = ContentScale.FillBounds
+            )
+
+            Surface(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = .3f),
+                modifier = Modifier
+                    .align(
+                        Alignment.BottomCenter
+                    ),
+                contentColor = MaterialTheme.colorScheme.surface
+            ) {
+                Column(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(4.dp)) {
+
+                    Text(text = "Real Name: ${ships.ship_name}")
+                    // Spacer(modifier = Modifier.height(2.dp))
+
+                    Text(text = "Ship Status: ${ships.active}")
+                    // Spacer(modifier = Modifier.height(2.dp))
+
+                    Text(text = "Weight: ${ships.weight_kg}")
+                    //  Spacer(modifier = Modifier.height(2.dp))
+
+                    Text(text = "Year Built: ${ships.year_built}")
+
+                }
+            }
+
+        }
+
+    }
+
+
 
 }
 

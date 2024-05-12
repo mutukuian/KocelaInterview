@@ -1,6 +1,7 @@
 package com.example.kocelainterview.data.remote.dto
 
-import com.example.kocelainterview.data.localdatasource.ShipsEntity
+
+import com.example.kocelainterview.data.localdatasource.ShipEntity
 import com.example.kocelainterview.domain.model.Ship
 
 
@@ -29,33 +30,19 @@ data class ShipDto(
     val year_built: Int
 )
 
-fun ShipDto.toShipEntity():ShipsEntity{
-    return ShipsEntity(
-        abs = abs,
-        active = active,
-        attempted_landings = attempted_landings,
-        `class` = `class`,
-        course_deg = course_deg,
-        home_port = home_port,
-        image = image,
-        imo = imo,
-        mmsi = mmsi,
-        roles = roles,
-        ship_id = ship_id,
-        ship_model = ship_model,
-        ship_name = ship_name,
-        ship_type = ship_type,
-        speed_kn = speed_kn,
-        status = status,
-        successful_landings = successful_landings,
-        url = url,
-        weight_kg = weight_kg,
-        weight_lbs = weight_lbs,
-        year_built = year_built
+fun ShipDto.toShipEntity():ShipEntity{
+    return ShipEntity(
+        id = 0, // Room will auto-generate id
+        ship_id = this.ship_id,
+        image = this.image,
+        ship_name = this.ship_name,
+        active = this.active,
+        weight_kg = this.weight_kg,
+        year_built = this.year_built
     )
 }
 
-fun ShipsEntity.toShip():Ship{
+fun ShipEntity.toShip():Ship{
     return Ship(
         active = active, ship_id = ship_id, ship_name = ship_name, image = image, weight_kg = weight_kg, year_built = year_built
     )

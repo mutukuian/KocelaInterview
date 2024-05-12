@@ -1,18 +1,22 @@
 package com.example.kocelainterview.data.localdatasource
 
-import androidx.paging.PagingSource
+
 import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Upsert
+
 
 @Dao
 interface ShipDao {
-    @Upsert
-    suspend fun upsertAll(ships:List<ShipsEntity>)
 
-    @Query("SELECT * FROM shipsentity")
-    fun pagingSource():PagingSource<Int ,ShipsEntity>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertShips(ships: List<ShipEntity>)
 
-    @Query("DELETE FROM shipsentity")
-    suspend fun clearAll()
+    @Query("SELECT * FROM ships")
+    suspend fun getCachedShips(): List<ShipEntity>
+
+    @Delete
+    suspend fun clearCache()
 }
