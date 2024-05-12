@@ -1,6 +1,7 @@
 package com.example.kocelainterview.presentation.ships_screen
 
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,16 +36,21 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberAsyncImagePainter
 import com.example.kocelainterview.domain.model.Ship
+import com.example.kocelainterview.presentation.search_controller.search_view_model.SearchViewModel
 
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShipListScreen(
 
     navController: NavController,
-    viewModel: ShipListViewModel = hiltViewModel()
+    viewModel: ShipListViewModel = hiltViewModel(),
+    view:SearchViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
+    val status = view.state.value
+
     var searchText by remember { mutableStateOf("") }
 
 
@@ -60,8 +66,12 @@ fun ShipListScreen(
         SearchBar(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             searchQuery = searchText,
-            onSearchQueryChanged = { searchText = it }
+            onSearchQueryChanged = { searchText = it }, // Update the search query
+            onSearchClicked = {
+                view.searchShip(searchText)
+            }
         )
+
 
 
         Spacer(modifier = Modifier.height(24.dp))

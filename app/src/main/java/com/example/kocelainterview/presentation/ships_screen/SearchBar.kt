@@ -16,6 +16,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
 
 import androidx.compose.ui.unit.dp
@@ -26,7 +30,10 @@ fun SearchBar(
     modifier: Modifier = Modifier,
     searchQuery: String,
     onSearchQueryChanged: (String) -> Unit,
+    onSearchClicked: () -> Unit // Add a new callback for search click
 ) {
+    var searchText by remember { mutableStateOf(searchQuery) } // Remember the search text
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -34,22 +41,19 @@ fun SearchBar(
             .clip(RoundedCornerShape(8.dp))
             .background(color = MaterialTheme.colorScheme.surfaceVariant),
     ) {
-       IconButton(onClick = { /*TODO*/ }) {
-           Icon(imageVector = Icons.Filled.Search, contentDescription = "Search Ships")
-       }
+        IconButton(onClick = { onSearchClicked() }) { // Trigger search on click
+            Icon(imageVector = Icons.Filled.Search, contentDescription = "Search Ships")
+        }
         OutlinedTextField(
-            value = searchQuery,
-            onValueChange = onSearchQueryChanged,
+            value = searchText,
+            onValueChange = {
+                searchText = it // Update the remembered search text
+                onSearchQueryChanged(it) // Notify the listener about the change
+            },
             modifier = Modifier.fillMaxWidth(),
             placeholder = {
-                             Text(text = "Search Ships")
-                          },
-//            leadingIcon = {
-//                Icon(
-//                    painter = painterResource(id = R.drawable.ic_search),
-//                    contentDescription = "Search Icon"
-//                )
-//            }
+                Text(text = "Search Ships")
+            },
         )
     }
 }
