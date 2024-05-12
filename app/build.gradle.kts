@@ -42,7 +42,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
     packaging {
         resources {
@@ -110,10 +110,7 @@ dependencies {
     //location
     implementation("com.google.android.gms:play-services-location:21.2.0")
 
-    //pagging
-    implementation("androidx.paging:paging-runtime-ktx:3.3.0-rc01")
-    //implementation("androidx.paging:paging-compose:3.2.1")
-    implementation("androidx.paging:paging-compose:3.3.0-rc01")
+
 
     //Room database
     implementation("androidx.room:room-ktx:2.6.1")
