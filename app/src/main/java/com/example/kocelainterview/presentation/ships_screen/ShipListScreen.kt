@@ -3,6 +3,7 @@ package com.example.kocelainterview.presentation.ships_screen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -89,7 +90,8 @@ fun ShipListScreen(
             }
 
             items(state.ships) { ship ->
-                ShipImageCard(ships = ship, onItemClick = {
+                ShipImageCard(ships = ship,
+                    onItemClick = {
                     navController.navigate(Screen.ShipDetailScreen.route +"/${ship.ship_id}")
                 })
             }
@@ -108,13 +110,14 @@ fun ShipListScreen(
     }
 }
 
-@OptIn(ExperimentalCoilApi::class)
+
 @Composable
 fun ShipImageCard(ships: Ship,onItemClick:(Ship)->Unit){
     val imagePainter = rememberAsyncImagePainter(model = ships.image)
     Card(
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier.padding(16.dp)
+            .clickable { onItemClick(ships) }
     ) {
         Box{
 
@@ -154,6 +157,7 @@ fun ShipImageCard(ships: Ship,onItemClick:(Ship)->Unit){
             }
 
         }
+
 
     }
 
