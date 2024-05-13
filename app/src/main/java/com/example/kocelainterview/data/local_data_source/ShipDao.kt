@@ -10,6 +10,7 @@ interface ShipDao {
     @Query("SELECT * FROM ships")
     fun getShips(): List<ShipEntity>
 
+    //insert
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveShips(ships: List<ShipEntity>)
 }
