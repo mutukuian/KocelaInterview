@@ -50,7 +50,7 @@ fun ShipListScreen(
     view:SearchViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
-    val status = view.state.value
+
 
     var searchText by remember { mutableStateOf("") }
 
@@ -90,7 +90,7 @@ fun ShipListScreen(
 
             items(state.ships) { ship ->
                 ShipImageCard(ships = ship, onItemClick = {
-                    navController.navigate(Screen.ShipDetailScreen.route)
+                    navController.navigate(Screen.ShipDetailScreen.route +"/{ships.id}")
                 })
             }
         }
