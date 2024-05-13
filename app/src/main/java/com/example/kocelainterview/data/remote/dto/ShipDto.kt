@@ -32,6 +32,7 @@ data class ShipDto(
 
 fun ShipDto.toEntity(): ShipEntity {
     return ShipEntity(
+
         ship_id = ship_id,
         active = active,
         image = image,
