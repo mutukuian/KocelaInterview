@@ -7,6 +7,9 @@ import com.example.kocelainterview.data.repository.SearchControllerRepositoryImp
 import com.example.kocelainterview.data.repository.ShipRepositoryImpl
 import com.example.kocelainterview.domain.repository_interface.SearchControllerRepository
 import com.example.kocelainterview.domain.repository_interface.ShipRepository
+import android.content.Context
+import androidx.room.Room
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,6 +29,16 @@ object RepositoryModule {
     @Singleton
     fun provideShipDao(database: ShipDatabase): ShipDao {
         return database.shipDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideShipDatabase(@ApplicationContext context: Context): ShipDatabase {
+        return Room.databaseBuilder(
+            context.applicationContext,
+            ShipDatabase::class.java,
+            "ship_database"
+        ).build()
     }
 
     @Provides
