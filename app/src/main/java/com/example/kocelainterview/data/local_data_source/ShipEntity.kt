@@ -6,7 +6,6 @@ import com.example.kocelainterview.data.remote.dto.ShipDto
 
 @Entity(tableName = "ships")
 data class ShipEntity(
-//    @PrimaryKey val id:Int,
     val ship_id: String,
     val active: Boolean,
     val image: String,
