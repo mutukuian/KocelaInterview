@@ -36,6 +36,7 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberAsyncImagePainter
 import com.example.kocelainterview.domain.model.Ship
+import com.example.kocelainterview.presentation.navigation.Screen
 import com.example.kocelainterview.presentation.search_controller.search_view_model.SearchViewModel
 
 
@@ -88,7 +89,9 @@ fun ShipListScreen(
             }
 
             items(state.ships) { ship ->
-                ShipImageCard(ships = ship)
+                ShipImageCard(ships = ship, onItemClick = {
+                    navController.navigate(Screen.ShipDetailScreen.route)
+                })
             }
         }
         if (state.error.isNotBlank()) {
@@ -107,7 +110,7 @@ fun ShipListScreen(
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun ShipImageCard(ships: Ship){
+fun ShipImageCard(ships: Ship,onItemClick:(Ship)->Unit){
     val imagePainter = rememberAsyncImagePainter(model = ships.image)
     Card(
         shape = MaterialTheme.shapes.medium,
