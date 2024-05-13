@@ -90,7 +90,7 @@ fun ShipListScreen(
 
             items(state.ships) { ship ->
                 ShipImageCard(ships = ship, onItemClick = {
-                    navController.navigate(Screen.ShipDetailScreen.route +"/{ships.id}")
+                    navController.navigate(Screen.ShipDetailScreen.route +"/${ship.ship_id}")
                 })
             }
         }
