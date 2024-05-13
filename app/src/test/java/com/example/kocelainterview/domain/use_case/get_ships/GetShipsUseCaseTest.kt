@@ -3,6 +3,7 @@ package com.example.kocelainterview.domain.use_case.get_ships
 import com.example.kocelainterview.common.core.Resource
 import com.example.kocelainterview.data.remote.dto.ShipDto
 import com.example.kocelainterview.data.remote.dto.toShip
+import com.example.kocelainterview.domain.model.Ship
 import com.example.kocelainterview.domain.repository_interface.ShipRepository
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
