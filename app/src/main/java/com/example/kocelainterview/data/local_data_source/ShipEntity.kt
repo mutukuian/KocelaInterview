@@ -8,7 +8,7 @@ import com.example.kocelainterview.data.remote.dto.ShipDto
 data class ShipEntity(
     @PrimaryKey val ship_id: String,
     val active: Boolean,
-    val image: String?,
+    val image: String,
     val ship_name: String,
     val weight_kg: Int,
     val year_built: Int
