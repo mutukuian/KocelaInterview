@@ -1,5 +1,6 @@
 package com.example.kocelainterview.common.di.repositorymodule
 
+import com.example.kocelainterview.data.local_data_source.ShipDao
 import com.example.kocelainterview.data.remote.api_service.ShipsApi
 import com.example.kocelainterview.data.repository.SearchControllerRepositoryImpl
 import com.example.kocelainterview.data.repository.ShipRepositoryImpl
@@ -16,8 +17,8 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun providesShipRepository(api:ShipsApi):ShipRepository{
-        return ShipRepositoryImpl(api)
+    fun providesShipRepository(api:ShipsApi,shipDao: ShipDao):ShipRepository{
+        return ShipRepositoryImpl(api,shipDao)
     }
 
     @Provides
