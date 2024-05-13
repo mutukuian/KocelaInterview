@@ -58,7 +58,8 @@ fun ShipListScreen(
 
     Column(modifier = Modifier
         .fillMaxSize()
-        .padding(16.dp)) {
+        .padding(16.dp))
+    {
 
         Text(text = "Ships List", style = MaterialTheme.typography.bodyMedium)
 
@@ -116,7 +117,8 @@ fun ShipImageCard(ships: Ship,onItemClick:(Ship)->Unit){
     val imagePainter = rememberAsyncImagePainter(model = ships.image)
     Card(
         shape = MaterialTheme.shapes.medium,
-        modifier = Modifier.padding(16.dp)
+        modifier = Modifier
+            .padding(16.dp)
             .clickable { onItemClick(ships) }
     ) {
         Box{

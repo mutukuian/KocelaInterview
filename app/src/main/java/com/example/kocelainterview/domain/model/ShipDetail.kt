@@ -2,6 +2,7 @@ package com.example.kocelainterview.domain.model
 
 data class ShipDetail(
     val active: Boolean,
+    val image: String,
     val home_port: String,
     val ship_id: String,
     val ship_name: String,
