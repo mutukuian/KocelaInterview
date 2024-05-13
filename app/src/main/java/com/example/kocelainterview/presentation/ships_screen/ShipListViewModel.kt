@@ -23,7 +23,7 @@ class ShipListViewModel @Inject constructor(
         getShips()
     }
 
-    private fun getShips() {
+    fun getShips() {
         viewModelScope.launch {
                 getShipsUseCase() // No search query parameter
                     .onEach { result ->
