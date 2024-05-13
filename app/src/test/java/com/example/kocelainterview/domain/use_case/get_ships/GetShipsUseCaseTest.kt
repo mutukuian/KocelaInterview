@@ -21,26 +21,12 @@ class GetShipsUseCaseTest {
         // Mock response from repository
         val mockShipDtos = listOf(
             ShipDto(
-                abs = 123,
+                
                 active = true,
-                attempted_landings = 2,
-                `class` = 1,
-                course_deg = 45.0,
-                home_port = "Port 1",
                 image = "https://example.com/image1.jpg",
-                imo = 456,
-                mmsi = 789,
-                roles = listOf("Role 1", "Role 2"),
                 ship_id = "ship_id_1",
-                ship_model = "Model 1",
                 ship_name = "Ship 1",
-                ship_type = "Type 1",
-                speed_kn = 20,
-                status = "Status 1",
-                successful_landings = 1,
-                url = "https://example.com/ship1",
                 weight_kg = 1000,
-                weight_lbs = 2200,
                 year_built = 2020
             )
 
