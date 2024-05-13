@@ -65,6 +65,7 @@ dependencies {
     //implementation(libs.androidx.paging.compose)
     // implementation(libs.androidx.material3.android)
     testImplementation(libs.junit)
+    testImplementation("junit:junit:4.12")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -117,6 +118,18 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-paging:2.6.1")
+
+
+    testImplementation("junit:junit:4.13")
+    testImplementation("org.mockito:mockito-core:5.2.1")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
+
+    //truth
+    testImplementation ("com.google.truth:truth:1.0.1")
+
+
+
+
 
 }
 //allow references to generate code
