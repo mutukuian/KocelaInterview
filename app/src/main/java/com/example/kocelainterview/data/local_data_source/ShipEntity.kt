@@ -9,7 +9,7 @@ data class ShipEntity(
 
     val ship_id: String,
     val active: Boolean,
-    val image: String,
+    val image: String?,
     val ship_name: String,
     @PrimaryKey
     val weight_kg: Int,

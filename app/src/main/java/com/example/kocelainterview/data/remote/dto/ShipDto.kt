@@ -13,7 +13,7 @@ data class ShipDto(
 //    val `class`: Int,
 //    val course_deg: Any,
    // val home_port: String,
-    val image: String,
+    val image: String?,
 //    val imo: Int,
 //    val mmsi: Int,
 //    val roles: List<String>,

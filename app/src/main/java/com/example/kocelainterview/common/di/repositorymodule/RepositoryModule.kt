@@ -38,7 +38,7 @@ object RepositoryModule {
             context.applicationContext,
             ShipDatabase::class.java,
             "ship_database"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Provides
