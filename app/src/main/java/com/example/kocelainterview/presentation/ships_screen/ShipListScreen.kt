@@ -20,8 +20,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,10 +34,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberAsyncImagePainter
 import com.example.kocelainterview.domain.model.Ship
 import com.example.kocelainterview.presentation.navigation.Screen
+import com.example.kocelainterview.presentation.search_controller.search_screen.SearchBar
 import com.example.kocelainterview.presentation.search_controller.search_view_model.SearchViewModel
 
 
@@ -48,9 +48,10 @@ fun ShipListScreen(
 
     navController: NavController,
     viewModel: ShipListViewModel = hiltViewModel(),
-    view:SearchViewModel = hiltViewModel()
+    searchViewModel:SearchViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
+    val searchState by searchViewModel.state.collectAsState()
 
 
     var searchText by remember { mutableStateOf("") }
@@ -71,7 +72,7 @@ fun ShipListScreen(
             searchQuery = searchText,
             onSearchQueryChanged = { searchText = it }, // Update the search query
             onSearchClicked = {
-                view.searchShip(searchText)
+                searchViewModel.searchShip(searchText)
             }
         )
 

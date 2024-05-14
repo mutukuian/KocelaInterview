@@ -9,7 +9,7 @@ data class ShipDetailDto(
     val `class`: Int,
     val course_deg: Any,
     val home_port: String,
-    val image: String,
+    val image: String?,
     val imo: Int,
     val mmsi: Int,
     val roles: List<String>,
@@ -27,5 +27,5 @@ data class ShipDetailDto(
 )
 
 fun ShipDetailDto.toShipDetail():ShipDetail{
-    return ShipDetail(active, home_port, ship_id, ship_name, ship_type,image, weight_kg, year_built)
+    return ShipDetail(active, image, home_port, ship_id, ship_name, ship_type, weight_kg, year_built)
 }

@@ -66,6 +66,7 @@ dependencies {
     // implementation(libs.androidx.material3.android)
     testImplementation(libs.junit)
     testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.12")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -121,8 +122,21 @@ dependencies {
 
 
     testImplementation("junit:junit:4.13")
-    testImplementation("org.mockito:mockito-core:5.2.1")
+    testImplementation("org.mockito:mockito-core:5.7.0")
+    androidTestImplementation("org.mockito:mockito-core:5.7.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
+    androidTestImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
+
+    // Use mockito-android for Android instrumentation tests
+    androidTestImplementation ("org.mockito:mockito-android:4.4.0")
+    androidTestImplementation ("androidx.arch.core:core-testing:2.2.0")
+
+    testImplementation("io.mockk:mockk:1.12.0")
+    androidTestImplementation("io.mockk:mockk-android:1.12.0")
+
+
+
+
 
     //truth
     testImplementation ("com.google.truth:truth:1.0.1")

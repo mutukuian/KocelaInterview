@@ -1,4 +1,4 @@
-package com.example.kocelainterview.presentation.ships_screen
+package com.example.kocelainterview.presentation.search_controller.search_screen
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
