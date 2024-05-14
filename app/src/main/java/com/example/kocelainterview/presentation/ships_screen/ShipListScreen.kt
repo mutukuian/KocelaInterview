@@ -21,11 +21,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,23 +33,17 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.kocelainterview.domain.model.Ship
 import com.example.kocelainterview.presentation.navigation.Screen
 import com.example.kocelainterview.presentation.search_controller.search_screen.SearchBar
-import com.example.kocelainterview.presentation.search_controller.search_view_model.SearchViewModel
 
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShipListScreen(
-
     navController: NavController,
     viewModel: ShipListViewModel = hiltViewModel(),
-    searchViewModel:SearchViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
-    val searchState by searchViewModel.state.collectAsState()
 
-
-    var searchText by remember { mutableStateOf("") }
 
 
     Column(modifier = Modifier
@@ -67,14 +56,14 @@ fun ShipListScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         //searchbar
-        SearchBar(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-            searchQuery = searchText,
-            onSearchQueryChanged = { searchText = it }, // Update the search query
-            onSearchClicked = {
-                searchViewModel.searchShip(searchText)
-            }
-        )
+//        SearchBar(
+//
+//            searchQuery = state.searchQuery,
+//            onSearchClicked = { query->
+//                viewModel.updateSearchQuery(query.toString()),onSearchQueryChanged =
+//            }
+
+        SearchBar(searchQuery = state.searchQuery, onSearchQueryChanged = { viewModel.updateSearchQuery("")}, onSearchClicked = {viewModel.updateSearchQuery(query = " ")})
 
 
 
@@ -109,7 +98,13 @@ fun ShipListScreen(
                     .align(Alignment.CenterHorizontally)
             )
         }
+
+
     }
+
+
+
+
 }
 
 

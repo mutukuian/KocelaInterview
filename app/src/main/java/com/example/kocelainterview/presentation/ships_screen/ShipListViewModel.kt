@@ -23,9 +23,9 @@ class ShipListViewModel @Inject constructor(
         getShips()
     }
 
-    fun getShips() {
+    fun getShips(query: String = "") {
         viewModelScope.launch {
-                getShipsUseCase() // No search query parameter
+                getShipsUseCase(query) // No search query parameter
                     .onEach { result ->
                         when (result) {
                             is Resource.Success -> {
@@ -37,6 +37,13 @@ class ShipListViewModel @Inject constructor(
                     }.launchIn(viewModelScope)
         }
     }
+
+    fun updateSearchQuery(query: String) {
+        _state.value = _state.value.copy(searchQuery = query)
+        getShips(query) // Trigger data fetch with the new query
+    }
+
+
 }
 
 

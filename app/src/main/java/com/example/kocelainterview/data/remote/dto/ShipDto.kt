@@ -7,7 +7,6 @@ import com.example.kocelainterview.domain.model.Ship
 
 
 data class ShipDto(
-
     val active: Boolean,
     val image: String?,
     val ship_id: String,

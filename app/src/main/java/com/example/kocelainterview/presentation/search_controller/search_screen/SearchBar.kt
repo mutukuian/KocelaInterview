@@ -23,6 +23,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
 
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.kocelainterview.presentation.ships_screen.ShipListViewModel
 
 
 @Composable
@@ -30,7 +32,8 @@ fun SearchBar(
     modifier: Modifier = Modifier,
     searchQuery: String,
     onSearchQueryChanged: (String) -> Unit,
-    onSearchClicked: () -> Unit // Add a new callback for search click
+    onSearchClicked: (Any?) -> Unit,
+    viewMode:ShipListViewModel = hiltViewModel()
 ) {
     var searchText by remember { mutableStateOf(searchQuery) } // Remember the search text
 
@@ -41,14 +44,15 @@ fun SearchBar(
             .clip(RoundedCornerShape(8.dp))
             .background(color = MaterialTheme.colorScheme.surfaceVariant),
     ) {
-        IconButton(onClick = { onSearchClicked() }) { // Trigger search on click
+        IconButton(onClick = { onSearchClicked(searchQuery) }) {
+            // Trigger search on click
             Icon(imageVector = Icons.Filled.Search, contentDescription = "Search Ships")
         }
         OutlinedTextField(
             value = searchText,
             onValueChange = {
                 searchText = it // Update the remembered search text
-                onSearchQueryChanged(it) // Notify the listener about the change
+                viewMode.updateSearchQuery(it) // Notify the listener about the change
             },
             modifier = Modifier.fillMaxWidth(),
             placeholder = {
@@ -57,3 +61,6 @@ fun SearchBar(
         )
     }
 }
+
+
+

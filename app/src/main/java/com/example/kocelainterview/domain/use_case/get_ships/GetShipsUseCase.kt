@@ -18,8 +18,15 @@ class GetShipsUseCase @Inject constructor(
    operator fun invoke(query: String = ""): Flow<Resource<List<Ship>>> = flow {
        try {
            emit(Resource.Loading<List<Ship>>())
-           val ships = repository.getShips().map { it.toShip() }
-           emit(Resource.Success<List<Ship>>(ships))
+           val allShips = repository.getShips()
+           val filteredShips = if(query.isEmpty()){
+               allShips.map { it.toShip() }
+           }else{
+               allShips.map { it.toShip() }.filter { ship->
+                   ship.ship_name.contains(query,ignoreCase = true)
+               }
+           }
+           emit(Resource.Success<List<Ship>>(filteredShips))
        }catch (e:HttpException){
            emit(Resource.Error<List<Ship>>(e.localizedMessage?:"An unexpected error occurred"))
        } catch (e:IOException){
