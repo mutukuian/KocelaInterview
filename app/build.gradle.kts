@@ -61,10 +61,12 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.compose.preview.renderer)
     //implementation(libs.androidx.material3.android)
     //implementation(libs.androidx.paging.compose)
     // implementation(libs.androidx.material3.android)
     testImplementation(libs.junit)
+    testImplementation("junit:junit:4.12")
     testImplementation("junit:junit:4.12")
     testImplementation("junit:junit:4.12")
     androidTestImplementation(libs.androidx.junit)
@@ -133,6 +135,8 @@ dependencies {
 
     testImplementation("io.mockk:mockk:1.12.0")
     androidTestImplementation("io.mockk:mockk-android:1.12.0")
+
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
 
 
 
