@@ -110,7 +110,7 @@ fun ShipDetailImageCard(shipDetail: ShipDetail) {
                         .padding(4.dp)
                 ) {
 
-                    //Text(text = "Ship: ${shipDetail.ship_name}")
+
 
                     Text(text = "Home Port: ${shipDetail.home_port}")
 
@@ -119,9 +119,6 @@ fun ShipDetailImageCard(shipDetail: ShipDetail) {
                         color = if (shipDetail.active) Color.Green else Color.Red,
                         style = MaterialTheme.typography.bodyLarge
                     )
-
-
-                    //Text(text = "Ship Type: ${shipDetail.ship_type}")
 
 
                     Text(text = "Year Built: ${shipDetail.year_built}")

@@ -138,13 +138,14 @@ dependencies {
 
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 
-
-
-
-
     //truth
     testImplementation ("com.google.truth:truth:1.0.1")
 
+    // Hilt
+    implementation ("androidx.hilt:hilt-work:1.0.0")
+
+// WorkManager
+    implementation ("androidx.work:work-runtime-ktx:2.8.1")
 
 
 

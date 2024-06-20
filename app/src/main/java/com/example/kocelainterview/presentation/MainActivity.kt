@@ -14,6 +14,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.work.Constraints
+import androidx.work.ExistingWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import com.example.kocelainterview.data.workers.ShipSyncWorker
 import com.example.kocelainterview.presentation.navigation.Screen
 import com.example.kocelainterview.presentation.ship_details_screen.ShipDetailScreen
 import com.example.kocelainterview.presentation.ships_screen.ShipListScreen
@@ -38,5 +44,24 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        startShipWorkSync()
+    }
+
+    private fun startShipWorkSync(){
+        val syncShipsWorkRequest = OneTimeWorkRequestBuilder<ShipSyncWorker>()
+            .setConstraints(
+                Constraints.Builder()
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .setRequiresBatteryNotLow(true)
+                    .build()
+            )
+            .build()
+
+        WorkManager.getInstance(applicationContext).enqueueUniqueWork(
+            "ShipSyncWorker",
+            ExistingWorkPolicy.KEEP,
+            syncShipsWorkRequest
+        )
     }
 }
