@@ -24,6 +24,9 @@ material3Android = "1.2.1"
 pagingCompose = "3.2.1"
 material3AndroidVersion = "1.2.1"
 composePreviewRenderer = "0.0.1-alpha01"
+mockWebServer = "5.0.0-alpha.11"
+coroutinesTest = "1.7.3"
+truth = "1.1.5"
 
 [libraries]
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
@@ -60,10 +63,15 @@ play-services-location = { module = "com.google.android.gms:play-services-locati
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "converterGson" }
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "pagingCompose" }
 compose-preview-renderer = { group = "com.android.tools.compose", name = "compose-preview-renderer", version.ref = "composePreviewRenderer" }
-
+test-mock-webserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "mockWebServer" }
+test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesTest" }
+test-truth = { module = "com.google.truth:truth", version.ref ="truth" }
 
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+[bundles]
+test = ["test-mock-webserver", "test-coroutines", "test-truth"]
 

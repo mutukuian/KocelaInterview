@@ -158,9 +158,6 @@ fun ShipImageCard(ships: Ship,onItemClick:(Ship)->Unit){
 
 
     }
-
-
-
 }
 
 

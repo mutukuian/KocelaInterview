@@ -1,7 +1,5 @@
 package com.example.kocelainterview.domain.model
 
-
-
 data class Ship(
     val active: Boolean,
     val image: String?,
