@@ -54,7 +54,7 @@ class ShipDaoTest {
     @Test
     fun insertWithConflict()= runTest{
         val ship1 = ShipEntity("ship1", true, "image1.jpg", "Ship 1", 5000, 2020)
-        val ship2 = ShipEntity("ship1", false, null, "Ship 2", 6000, 2015) // Conflicting ship_id
+        val ship2 = ShipEntity("ship1", false, null, "Ship 2", 6000, 2015)
 
 
         shipDao.saveShips(listOf(ship1))
@@ -66,8 +66,8 @@ class ShipDaoTest {
         val savedShips = shipDao.getShips()
 
 
-        assertEquals(1, savedShips.size) // Only one should be saved
-        assertEquals(ship2.ship_name, savedShips[0].ship_name) // Ensure the correct ship is saved
+        assertEquals(1, savedShips.size)
+        assertEquals(ship2.ship_name, savedShips[0].ship_name)
 
     }
 }
