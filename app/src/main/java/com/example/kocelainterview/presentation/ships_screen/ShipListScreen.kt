@@ -16,7 +16,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -36,7 +35,6 @@ import com.example.kocelainterview.presentation.search_controller.search_screen.
 
 
 @SuppressLint("StateFlowValueCalledInComposition")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShipListScreen(
     navController: NavController,
@@ -44,31 +42,22 @@ fun ShipListScreen(
 ) {
     val state = viewModel.state.value
 
-
-
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp))
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    )
     {
-
         Text(text = "Ships List", style = MaterialTheme.typography.bodyMedium)
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        //searchbar
-//        SearchBar(
-//
-//            searchQuery = state.searchQuery,
-//            onSearchClicked = { query->
-//                viewModel.updateSearchQuery(query.toString()),onSearchQueryChanged =
-//            }
-
-        SearchBar(searchQuery = state.searchQuery, onSearchQueryChanged = { viewModel.updateSearchQuery("")}, onSearchClicked = {viewModel.updateSearchQuery(query = " ")})
-
-
+        SearchBar(
+            searchQuery = state.searchQuery,
+            onSearchQueryChanged = { viewModel.updateSearchQuery("") },
+            onSearchClicked = { viewModel.updateSearchQuery(query = " ") })
 
         Spacer(modifier = Modifier.height(24.dp))
-
         LazyColumn {
             if (state.isLoading) {
                 item {
@@ -79,17 +68,16 @@ fun ShipListScreen(
                     )
                 }
             }
-
             items(state.ships) { ship ->
                 ShipImageCard(ships = ship,
                     onItemClick = {
-                    navController.navigate(Screen.ShipDetailScreen.route +"/${ship.ship_id}")
-                })
+                        navController.navigate(Screen.ShipDetailScreen.route + "/${ship.ship_id}")
+                    })
             }
         }
         if (state.error.isNotBlank()) {
             Text(
-                text =state.error,
+                text = state.error,
                 color = Color.Red,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
@@ -98,18 +86,11 @@ fun ShipListScreen(
                     .align(Alignment.CenterHorizontally)
             )
         }
-
-
     }
-
-
-
-
 }
 
-
 @Composable
-fun ShipImageCard(ships: Ship,onItemClick:(Ship)->Unit){
+fun ShipImageCard(ships: Ship, onItemClick: (Ship) -> Unit) {
     val imagePainter = rememberAsyncImagePainter(model = ships.image)
     Card(
         shape = MaterialTheme.shapes.medium,
@@ -117,8 +98,7 @@ fun ShipImageCard(ships: Ship,onItemClick:(Ship)->Unit){
             .padding(16.dp)
             .clickable { onItemClick(ships) }
     ) {
-        Box{
-
+        Box {
             Image(
                 painter = imagePainter,
                 contentDescription = null,
@@ -127,7 +107,6 @@ fun ShipImageCard(ships: Ship,onItemClick:(Ship)->Unit){
                     .height(200.dp),
                 contentScale = ContentScale.FillBounds
             )
-
             Surface(
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = .3f),
                 modifier = Modifier
@@ -136,28 +115,18 @@ fun ShipImageCard(ships: Ship,onItemClick:(Ship)->Unit){
                     ),
                 contentColor = MaterialTheme.colorScheme.surface
             ) {
-                Column(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(4.dp)) {
-
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp)
+                ) {
                     Text(text = "Real Name: ${ships.ship_name}")
-                    // Spacer(modifier = Modifier.height(2.dp))
-
                     Text(text = "Ship Status: ${ships.active}")
-                    // Spacer(modifier = Modifier.height(2.dp))
-
                     Text(text = "Weight: ${ships.weight_kg}")
-                    //  Spacer(modifier = Modifier.height(2.dp))
-
                     Text(text = "Year Built: ${ships.year_built}")
 
                 }
             }
-
         }
-
-
     }
 }
-
-

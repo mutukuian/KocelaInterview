@@ -2,6 +2,8 @@ package com.example.kocelainterview.presentation.ships_screen
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kocelainterview.common.core.Resource
@@ -25,7 +27,7 @@ class ShipListViewModel @Inject constructor(
 
     fun getShips(query: String = "") {
         viewModelScope.launch {
-                getShipsUseCase(query) // No search query parameter
+                getShipsUseCase(query)
                     .onEach { result ->
                         when (result) {
                             is Resource.Success -> {
@@ -40,10 +42,8 @@ class ShipListViewModel @Inject constructor(
 
     fun updateSearchQuery(query: String) {
         _state.value = _state.value.copy(searchQuery = query)
-        getShips(query) // Trigger data fetch with the new query
+        getShips(query)
     }
-
-
 }
 
 

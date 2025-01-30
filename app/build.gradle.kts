@@ -22,6 +22,7 @@ android {
         }
     }
 
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -49,6 +50,14 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    testOptions {
+        packagingOptions {
+            jniLibs {
+                useLegacyPackaging = true
+            }
+        }
+    }
 }
 
 dependencies {
@@ -61,10 +70,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    //implementation(libs.compose.preview.renderer)
-    //implementation(libs.androidx.material3.android)
-    //implementation(libs.androidx.paging.compose)
-    // implementation(libs.androidx.material3.android)
     testImplementation(libs.junit)
     testImplementation("junit:junit:4.12")
     testImplementation("junit:junit:4.12")
@@ -136,15 +141,14 @@ dependencies {
     testImplementation("io.mockk:mockk:1.12.0")
     androidTestImplementation("io.mockk:mockk-android:1.12.0")
 
-//    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-
-    //truth
-//    testImplementation ("com.google.truth:truth:1.0.1")
-
     testImplementation(libs.bundles.test)
 
     // Hilt
     implementation ("androidx.hilt:hilt-work:1.0.0")
+
+    // Hilt testing
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.50")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.50")
 
 // WorkManager
     implementation ("androidx.work:work-runtime-ktx:2.8.1")
